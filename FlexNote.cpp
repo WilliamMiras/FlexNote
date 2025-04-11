@@ -2,7 +2,11 @@
 #include <windows.h>
 #include <string.h>
 #include <tchar.h>
-#include <sstream>
+#include <vector>
+#include <objbase.h>
+#include <rtscom.h> // RealTimeStylus
+#include <comdef.h> // For _com_smartptr
+using namespace std;
 
 // Main window class name
 static TCHAR szWindowClass[] = _T("FlexNote");
@@ -12,6 +16,13 @@ static TCHAR szTitle[] = _T("A Better Note Taking App");
 
 // Stored instance handle for use in Win32 API calls
 HINSTANCE hInst;
+
+// COM smart pointer for RealTimeStylus
+_COM_SMARTPTR_TYPEDEF(IRealTimeStylus, __uuidof(IRealTimeStylus));
+_COM_SMARTPTR_TYPEDEF(IStylusSyncPlugin, __uuidof(IStylusSyncPlugin));
+_COM_SMARTPTR_TYPEDEF(IDynamicRenderer, __uuidof(IStylusSyncPlugin));
+
+// Storing RealTimeStylus Strokes
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
